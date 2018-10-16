@@ -32,7 +32,9 @@ class DetailItemsViewController: UIViewController, UITextFieldDelegate, GADBanne
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
+        if sublist != nil {
         hud = loadingAnimation()
+        }
         
         loadLists()
         
@@ -296,7 +298,7 @@ extension DetailItemsViewController: UITableViewDataSource {
             deleteLocReminder(list: list)
             
             //delete deadline when list is deleted
-            deleteDeadline(list: list) //not working
+            deleteDeadline(list: list) 
             
             let privateDatabase = CKContainer.default().privateCloudDatabase
             

@@ -57,8 +57,9 @@ class MasterViewController: UIViewController, UITextFieldDelegate, GADBannerView
         hud = loadingAnimation()
         
         splitViewController?.delegate = self
-        self.inputNewList.delegate = self
         
+        self.inputNewList.delegate = self
+       
         loadLists()
     }
     
@@ -239,7 +240,7 @@ extension MasterViewController: UITableViewDataSource {
             deleteLocReminder(list: list)
             
             //delete deadline when list is deleted
-            deleteDeadline(list: list) //not working
+            deleteDeadline(list: list) 
             
             deleteChildAlerts(list: list, listType: "sublists")
             

@@ -34,7 +34,11 @@ class SublistViewController: UIViewController, UITextFieldDelegate, GADBannerVie
     override func viewWillAppear(_ animated: Bool) {
         configureVisual()
         configureAds()
+        
+        if masterList != nil {
         hud = loadingAnimation()
+        }
+    
         loadLists()
         
         refresh = UIRefreshControl()
@@ -51,6 +55,7 @@ class SublistViewController: UIViewController, UITextFieldDelegate, GADBannerVie
         super.viewDidLoad()
         
         self.inputNewItem.delegate = self
+        
         longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(recognizer:)))
         
         sublistTableView.addGestureRecognizer(longPressGesture)
@@ -139,7 +144,7 @@ class SublistViewController: UIViewController, UITextFieldDelegate, GADBannerVie
         navBar?.tintColor = backgroundColor
         navBar?.barTintColor = .white
         navBar?.titleTextAttributes = [NSAttributedStringKey.font: UIFont(name:"Quicksand-Bold", size: 18)!, .foregroundColor: backgroundColor]
-        
+
         addItemBtn.tintColor = UIColor.flatOrangeDark
     }
     
@@ -348,7 +353,7 @@ extension SublistViewController: UITableViewDataSource {
             deleteLocReminder(list: list)
             
             //delete deadline when list is deleted
-            deleteDeadline(list: list) //not working
+            deleteDeadline(list: list) 
             
             deleteChildAlerts(list: list)
             
@@ -367,3 +372,6 @@ extension SublistViewController: UITableViewDataSource {
         }
     }
 }
+
+
+
