@@ -1,5 +1,5 @@
 //
-//  DetailViewController.swift
+//  SublistViewController.swift
 //  MasterList
 //
 //  Created by Jon Boling on 8/3/18.
@@ -29,6 +29,9 @@ class SublistViewController: UIViewController, UITextFieldDelegate, GADBannerVie
     @IBOutlet weak var inputNewItem: UITextField!
     @IBOutlet weak var addItemBtn: UIButton!
     @IBOutlet weak var sublistTableView: UITableView!
+    @IBOutlet weak var welcomeLabel: UILabel!
+    @IBOutlet weak var guideLabel: UILabel!
+    @IBOutlet weak var welcomeSubLabel: UILabel!
     
     
     override func viewWillAppear(_ animated: Bool) {
@@ -36,7 +39,25 @@ class SublistViewController: UIViewController, UITextFieldDelegate, GADBannerVie
         configureAds()
         
         if masterList != nil {
-        hud = loadingAnimation()
+            welcomeLabel.isHidden = true
+            welcomeSubLabel.isHidden = true
+            guideLabel.isHidden = false
+            hud = loadingAnimation()
+        } else {
+            view.backgroundColor = backgroundColor
+            navigationController?.title = "MasterLists"
+            navigationItem.title = "MasterLists"
+            welcomeLabel.isHidden = false
+            sublistTableView.isHidden = true
+            addItemBtn.isHidden = true
+            inputNewItem.isHidden = true
+            guideLabel.isHidden = true
+            welcomeLabel.text = "Welcome to MasterLists"
+            welcomeLabel.font = UIFont(name:"Quicksand-Regular", size: 40)!
+            welcomeLabel.textColor = UIColor.white
+            welcomeSubLabel.font = UIFont(name: "Quicksand-Light", size: 24)!
+            welcomeSubLabel.text = "Create a Master List or choose an existing one to continue"
+            welcomeSubLabel.textColor = UIColor.white
         }
     
         loadLists()
@@ -53,8 +74,11 @@ class SublistViewController: UIViewController, UITextFieldDelegate, GADBannerVie
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        welcomeLabel.isHidden = true
+        inputNewItem.delegate = self
         
-        self.inputNewItem.delegate = self
+        navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
+        navigationItem.leftItemsSupplementBackButton = true
         
         longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(recognizer:)))
         
@@ -94,6 +118,7 @@ class SublistViewController: UIViewController, UITextFieldDelegate, GADBannerVie
         inputNewItem.resignFirstResponder()
         sublistWasAdded()
     }
+    
     
     func sublistWasAdded() {
         if inputNewItem.text != "" {

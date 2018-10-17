@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  MasterViewController.swift
 //  MasterList
 //
 //  Created by Jon Boling on 8/3/18.

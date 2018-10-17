@@ -26,6 +26,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         GADMobileAds.configure(withApplicationID: "ca-app-pub-3684839275222485~8639645147")
         
         Instabug.start(withToken: "de7e62c28c040d9bcf8086441b29fca1", invocationEvents: [.shake, .screenshot])
+        
+        let splitViewController = window?.rootViewController as? UISplitViewController
+        splitViewController?.preferredDisplayMode = .allVisible
 
         return true
     }
